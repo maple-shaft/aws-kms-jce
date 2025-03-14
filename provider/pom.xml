@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>kms-jce-provider</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0_map_fork</version>
     <packaging>jar</packaging>
 
     <name>AWS KMS JCE Provider</name>
@@ -19,7 +19,7 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>kms</artifactId>
         </dependency>
-
+        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
