@@ -59,12 +59,14 @@ public class CsrGeneratorTest {
         System.out.println("CSR:");
         System.out.println(csr);
 
-        PEMParser pemParser = new PEMParser(new InputStreamReader(new ByteArrayInputStream(csr.getBytes())));
-        PKCS10CertificationRequest request = (PKCS10CertificationRequest) pemParser.readObject();
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(csr.getBytes());
+        		InputStreamReader isr = new InputStreamReader(bis);
+        		PEMParser pemParser = new PEMParser(isr)) {
+        	PKCS10CertificationRequest request = (PKCS10CertificationRequest) pemParser.readObject();
 
-        ContentVerifierProvider contentVerifierProvider = new JcaContentVerifierProviderBuilder().build(keyPair.getPublic());
-        Assert.assertTrue(request.isSignatureValid(contentVerifierProvider));
-
+        	ContentVerifierProvider contentVerifierProvider = new JcaContentVerifierProviderBuilder().build(keyPair.getPublic());
+        	Assert.assertTrue(request.isSignatureValid(contentVerifierProvider));
+        }
     }
 
 }

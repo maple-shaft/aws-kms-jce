@@ -37,8 +37,9 @@ public abstract class SelfSignedCrtGenerator {
      */
     public static String generate(KeyPair keyPair, String csr, KmsSigningAlgorithm kmsSigningAlgorithm, int validity) {
 
-        try {
-            PEMParser pemParser = new PEMParser(new InputStreamReader(new ByteArrayInputStream(csr.getBytes(StandardCharsets.UTF_8))));
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(csr.getBytes(StandardCharsets.UTF_8));
+        		InputStreamReader isr = new InputStreamReader(bis);
+        		PEMParser pemParser = new PEMParser(isr)) {
             PKCS10CertificationRequest csrRequest = (PKCS10CertificationRequest) pemParser.readObject();
 
             X509v3CertificateBuilder certificateGenerator = new X509v3CertificateBuilder(
@@ -61,7 +62,7 @@ public abstract class SelfSignedCrtGenerator {
             pemWriter.writeObject(new PemObject("CERTIFICATE", certificate.getEncoded()));
             pemWriter.close();
 
-            return certOutputStream.toString(StandardCharsets.UTF_8);
+            return certOutputStream.toString("UTF-8");
 
         } catch (Exception e) {
             throw new RuntimeException(e);

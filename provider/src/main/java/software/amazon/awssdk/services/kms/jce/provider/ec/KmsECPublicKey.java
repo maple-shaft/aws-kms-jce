@@ -14,7 +14,9 @@ import java.security.spec.ECPoint;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class KmsECPublicKey implements KmsPublicKey, ECPublicKey {
 
-    @NonNull
+    private static final long serialVersionUID = -3961798337492898574L;
+    
+	@NonNull
     private final String id;
     private final ECPublicKey publicKey;
 

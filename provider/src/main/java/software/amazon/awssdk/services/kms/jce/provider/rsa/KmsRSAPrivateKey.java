@@ -13,7 +13,9 @@ import java.security.interfaces.RSAPrivateKey;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class KmsRSAPrivateKey implements KmsKey, RSAPrivateKey {
 
-    @NonNull
+    private static final long serialVersionUID = 720254555954085303L;
+    
+	@NonNull
     private final String id;
     private final String algorithm = "RSA";
     private final String format = "X.509";

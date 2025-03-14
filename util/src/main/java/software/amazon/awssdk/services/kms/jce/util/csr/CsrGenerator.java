@@ -11,7 +11,6 @@ import org.bouncycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 import javax.security.auth.x500.X500Principal;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 
 public abstract class CsrGenerator {
@@ -38,7 +37,7 @@ public abstract class CsrGenerator {
             pemWriter.writeObject(csr);
             pemWriter.close();
 
-            return byteArrayOutputStream.toString(StandardCharsets.UTF_8);
+            return byteArrayOutputStream.toString("UTF-8");
 
         } catch (Exception e) {
             throw new RuntimeException(e);

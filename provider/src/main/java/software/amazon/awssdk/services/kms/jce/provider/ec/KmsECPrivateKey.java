@@ -14,7 +14,9 @@ import java.security.spec.ECParameterSpec;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class KmsECPrivateKey implements KmsKey, ECPrivateKey {
 
-    @NonNull
+    private static final long serialVersionUID = -3162329511654522166L;
+    
+	@NonNull
     private final String id;
     private final String algorithm = "EC";
     private final String format = "PKCS#8";

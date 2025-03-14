@@ -13,7 +13,9 @@ import java.security.interfaces.RSAPublicKey;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class KmsRSAPublicKey implements KmsPublicKey, RSAPublicKey {
 
-    @NonNull
+    private static final long serialVersionUID = -8966059064926877692L;
+    
+	@NonNull
     private final String id;
     private final RSAPublicKey publicKey;
 
