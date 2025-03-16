@@ -4,5 +4,7 @@
 /.idea/
 *.iml
 **/target/
+**/build/
 /lsp/
 *.DS_Store
+/.gradle/

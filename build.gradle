@@ -1,0 +1,43 @@
+// Master Build file
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
+plugins {
+	id 'base'
+	id 'eclipse'
+}
+
+eclipse {
+	project {
+		comment = 'Project created by Buildship'
+		buildCommand 'org.eclipse.buildship.core.gradleprojectbuilder'
+		natures = ['org.eclipse.wst.common.project.facet.core.nature',
+			'org.eclipse.wst.common.modulecore.ModuleCoreNature',
+			'org.eclipse.buildship.core.gradleprojectnature']
+	}
+}
+
+ext {
+	sourceEncoding = 'UTF-8'
+	javaVersion = '1.8'
+	awsBomVersion = '2.13.61'
+	lombokVersion = '6.6.1'
+    	junitVersion = '4.13.1'
+}
+
+allprojects { proj ->
+    group = 'software.amazon.awssdk'
+    version = '1.0.0_map_fork'
+    
+    //dependencies {
+    //	implementation "org.projectlombok:lombok:${ext.lombokVersion}"
+    //}
+    System.out.println(proj)
+}
+
+assemble.dependsOn ':kms-jce-provider:assemble'
+assemble.dependsOn ':kms-jce-util:assemble'

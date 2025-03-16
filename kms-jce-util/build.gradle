@@ -1,0 +1,58 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'io.freefair.lombok' version '6.6.1'
+}
+
+eclipse {
+	project {
+		comment = 'Project created by Buildship'
+		buildCommand 'org.eclipse.buildship.core.gradleprojectbuilder'
+		natures = ['org.eclipse.jdt.core.javanature',
+			'org.eclipse.wst.common.project.facet.core.nature',
+			'org.eclipse.wst.common.modulecore.ModuleCoreNature',
+			'org.eclipse.buildship.core.gradleprojectnature']
+	}
+
+	classpath {
+		//if you want to expose test classes to dependent projects
+		containsTestFixtures = true
+	}
+	jdt {
+    	sourceCompatibility = 1.8
+		targetCompatibility = 1.8
+		javaRuntimeName = 'JavaSE-1.8'
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+compileJava {
+   	sourceCompatibility = '8'
+   	targetCompatibility = '8'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+ext {
+	 bcpkixJdk15onVersion = '1.66'
+}
+
+dependencies {
+	implementation project(':kms-jce-provider')
+	implementation(group: 'software.amazon.awssdk', name: 'kms', version: '2.13.61') {
+		exclude(group: 'org.slf4j')
+	}
+	implementation(group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: "1.66") {
+		exclude(group: 'org.slf4j')
+	}
+	implementation(group: 'software.amazon.awssdk', name: 'bom', version: "${rootProject.ext.awsBomVersion}") {
+		exclude(group: 'org.slf4j')
+	}
+	
+	testImplementation 'junit:junit:4+'
+}
+
+assemble.dependsOn jar
