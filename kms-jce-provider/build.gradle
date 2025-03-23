@@ -29,6 +29,10 @@ repositories {
 	mavenCentral()
 }
 
+configurations {
+	kmsJceProviderConsume
+}
+
 compileJava {
    	sourceCompatibility = '8'
    	targetCompatibility = '8'
@@ -42,6 +46,10 @@ dependencies {
 	}
 	
 	testImplementation 'junit:junit:4+'
+}
+
+artifacts {
+	kmsJceProviderConsume jar
 }
 
 assemble.dependsOn jar
