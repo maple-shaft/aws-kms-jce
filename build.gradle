@@ -43,12 +43,13 @@ configurations {
 }
 
 dependencies {
-	subprojects.each {
-		awsKmsJceResolve it
-	}
+	awsKmsJceResolve project(':kms-jce-provider')
+	awsKmsJceResolve project(':kms-jce-util')
 }
 
 task jars(type: Zip) {
+	group = 'build'
+	description = 'Assemble all dependencies and build artifacts into a distributable Zip file.'
 	dependsOn configurations.awsKmsJceResolve
 	from configurations.awsKmsJceResolve 
 	archiveBaseName = 'aws-kms-jce'
